@@ -81,16 +81,21 @@ class SensorController extends Controller
     }
 
     private function sendTelegramAlert($log)
-    {
-        $token = env('TELEGRAM_BOT_TOKEN');
-        $chatId = env('TELEGRAM_CHAT_ID');
+{
+    $token = env('TELEGRAM_BOT_TOKEN');
+    $chatId = env('TELEGRAM_CHAT_ID');
 
-        if ($token && $chatId) {
-            Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+    if ($token && $chatId) {
+        try {
+            // Tambahkan ->withoutVerifying() untuk mengabaikan rantai sertifikat SSL di environment lokal
+            Http::withoutVerifying()->timeout(3)->post("https://api.telegram.org/bot{$token}/sendMessage", [
                 'chat_id'    => $chatId,
                 'text'       => "⚠️ *PERINGATAN TAHUGUARD*\n\nDevice: {$log->device_id}\nSuhu: {$log->temperature} °C\npH Level: {$log->ph_level}\nStatus: *CRITICAL (ASAM/BASI)*",
                 'parse_mode' => 'Markdown'
             ]);
+        } catch (\Exception $e) {
+            \Log::warning("Gagal mengirim Telegram Alert: " . $e->getMessage());
         }
     }
+}
 }

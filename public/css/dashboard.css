@@ -1,0 +1,87 @@
+:root {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-hover: #334155;
+    --border-color: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-gold: #f59e0b;
+    --accent-glow: rgba(245, 158, 11, 0.25);
+    --chart-grid: rgba(255, 255, 255, 0.08);
+    --chart-text: #94a3b8;
+}
+
+[data-theme="light"] {
+    --bg-main: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent-gold: #d97706;
+    --accent-glow: rgba(217, 119, 6, 0.15);
+    --chart-grid: rgba(0, 0, 0, 0.06);
+    --chart-text: #64748b;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-card {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-border {
+    border-color: var(--border-color);
+}
+
+/* 3D Tahu Cube Preloader */
+.cube-wrapper { perspective: 800px; }
+.cube {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 4s infinite linear;
+}
+.cube-face {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    border: 2px solid #fff;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    opacity: 0.9;
+    border-radius: 8px;
+}
+.face-front  { transform: translateZ(35px); }
+.face-back   { transform: rotateY(180deg) translateZ(35px); }
+.face-right  { transform: rotateY(90deg) translateZ(35px); }
+.face-left   { transform: rotateY(-90deg) translateZ(35px); }
+.face-top    { transform: rotateX(90deg) translateZ(35px); background: #fef3c7; }
+.face-bottom { transform: rotateX(-90deg) translateZ(35px); background: #b45309; }
+
+@keyframes rotateCube {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* Pulse Glowing LED */
+.led-pulse {
+    box-shadow: 0 0 12px currentColor;
+    animation: pulseGlow 1.5s infinite alternate;
+}
+@keyframes pulseGlow {
+    from { opacity: 0.7; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1.05); }
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }

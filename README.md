@@ -1,58 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧀 TahuGuard - ESP32-C3 Edge AIoT Smart Fermentation System
+> **Riset UMKM Tahu Sumedang** | Sistem Monitoring Telemetri Real-Time & Estimasi Soft Sensor Kinetika Fermentasi Tahu
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## 📌 Penjelasan Tema Proyek Kolaboratif
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**TahuGuard** adalah sistem pemantauan fermentasi air biang tahu berbasis *Edge AIoT* (Artificial Intelligence of Things) yang dirancang khusus untuk meningkatkan presisi penggumpalan pada industri UMKM Tahu Sumedang. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Dalam proses tradisional, pengujian keasaman cairan whey asam sering kali merusak sensor pH kaca akibat suhu tinggi dan sifat korosif asam. **TahuGuard** menyelesaikan masalah ini dengan mengimplementasikan **Soft Sensor Kinetika Orde Pertama** yang mengekstrapolasi nilai pH berdasarkan variabel suhu NTC 10K dan waktu fermentasi. Data diproses secara *real-time* via microservice WebSocket Node.js, disajikan pada Dashboard Laravel 13, dan terintegrasi otomatis dengan Telegram Bot Alert.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 👥 Tim Pengembang (Contributors)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Nama Pengembang | Peran / Spesialisasi | Kontak |
+| :--- | :--- | :--- |
+| **Haikal Luthfianino Balukia** | Embedded Systems Specialist | `haikalluthfianinobalukia@proton.me` |
+| **Muzayin Jamil** | Backend Lead Engineer | `zeinofficial19@gmail.com` |
+| **Raidan Arya Pradana** | IoT Hardware & Actuators | `aryapradanaraidan@gmail.com` |
+| **Piere Anggadipraja Sukandi** | UI/UX & Frontend Engineer | `wetansumedang91@gmail.com` |
+| **Dani Sonjaya** | Network & Telemetry Analyst | `danisonjaya73@gmail.com` |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 📸 Tangkapan Layar (Screenshots) Dashboard Web
 
-## Agentic Development
+Simpan gambar screenshot di folder `docs/screenshots/` dengan nama file berikut:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 1. Telemetri Real-Time
+Memantau Soft Sensor pH, Suhu (NTC 10K), Kelembaban, Status Aktuator, dan Visualisasi Grafik Live.
+![Telemetri Real-Time](docs/screenshots/telemetri-realtime.png)
 
-```bash
-composer require laravel/boost --dev
+### 2. Model Kinetika & AI
+Formulasi matematis orde pertama untuk estimasi penurunan pH tanpa sensor fisik korosif.
+![Model Kinetika AI](docs/screenshots/model-kinetika.png)
 
-php artisan boost:install
-```
+### 3. Riwayat Batch Log
+Rekam jejak histori telemetri per batch produksi dilengkapi fitur ekspor laporan berkas CSV.
+![Riwayat Batch Log](docs/screenshots/riwayat-log.png)
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 4. Hardware ESP32-C3
+Informasi spesifikasi modul mikrokontroler RISC-V Micro-Edge yang digunakan pada unit node.
+![Hardware Specs](docs/screenshots/hardware-specs.png)
 
-## Contributing
+### 5. Tentang Pengembang
+Halaman informasi profil dan pembagian tugas tim kolaboratif TahuGuard.
+![Tentang Pengembang](docs/screenshots/tentang-pengembang.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🧮 Model Kinetika Penggumpalan (Soft Sensor)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Persamaan kinetika yang diimplementasikan pada sistem untuk menggantikan sensor pH kaca:
 
-## Security Vulnerabilities
+$$k(T) = 0.25 + 0.015 \times (T - 30.0)$$
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+$$pH(t) = 3.5 + 3.3 \times e^{-k \times t}$$
 
-## License
+* **Rentang pH Optimal Penggumpalan:** $pH\ 4.2 - 5.2$ (Warna Hijau / Status Normal)
+* **Status Critical / Fermentasi Basi:** $pH < 4.2$ (Trigger Alarm Web Audio & Telegram Alert)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🛠️ Arsitektur & Teknologi
+
+* **Firmware:** ESP32-C3 RISC-V Single-core @ 160MHz (C++ / Arduino Framework)
+* **Backend Framework:** Laravel 13 (PHP 8.x) & MySQL Database
+* **Real-Time Communication:** Node.js Socket.io Microservice (Port 6001)
+* **Frontend:** Blade, Tailwind CSS, Chart.js, Web Audio API Synth
+* **Notification Integration:** Telegram Bot API Webhook
